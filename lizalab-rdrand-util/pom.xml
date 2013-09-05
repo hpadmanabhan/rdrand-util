@@ -19,6 +19,7 @@
 
   <modules>
     <module>lizalab-rdrand-util-java</module>
+    <module>lizalab-rdrand-util-native</module>
   </modules>
 
   <properties>

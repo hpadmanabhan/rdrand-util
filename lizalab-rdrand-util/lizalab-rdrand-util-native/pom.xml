@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.lizalab.util</groupId>
+    <artifactId>lizalab-rdrand-util</artifactId>
+    <version>0.0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>lizalab-rdrand-util-native</artifactId>
+  <packaging>so</packaging>
+
+  <name>lizalab-rdrand-util-native</name>
+  <description>Defines the native module implementing the header defined by the Java module calling RdRand</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>net.lizalab.util</groupId>
+      <artifactId>lizalab-rdrand-util-java</artifactId>
+      <version>${parent.version}</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>native-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <compilerProvider>generic-classic</compilerProvider>
+          <compilerExecutable>gcc</compilerExecutable>
+          <linkerExecutable>gcc</linkerExecutable>
+          <sources>
+            <source>
+              <directory>../src/main/native</directory>
+              <fileNames>
+                <fileName>rdrand.c</fileName>
+                <fileName>rdrandutil.c</fileName>
+              <fileNames>
+            </source>
+          </sources>
+          <compileStartOptions>
+            <compileStartOption>-g -O2 -O2 -fPIC</compileStartOption>
+          </compileStartOptions>
+          <linkerStartOptions>
+            <linkerStartOption>-shared -L. -lrdrand</linkerStartOption>
+          </linkerStartOptions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>javah</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <javahProvider>default</javahProvider>
+              <javahOutputDirectory>${project.build.directory}/custom-javah</javahOutputDirectory>
+              <workingDirectory>${basedir}</workingDirectory>
+              <javahOutputFileName>rdrandutil.h</javahOutputFileName>
+              <javahClassNames>
+                <javahClassName>net.lizalab.util.RdRandUtil</javahClassName>
+              </javahClassNames>
+            </configuration>
+            <goals>
+              <goal>javah</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
