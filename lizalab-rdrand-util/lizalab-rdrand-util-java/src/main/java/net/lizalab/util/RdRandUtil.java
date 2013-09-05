@@ -10,6 +10,12 @@ package net.lizalab.util;
 public final class RdRandUtil {
 	
 	/**
+	 * Hidden constructor for utility class.
+	 */
+	private RdRandUtil() {
+	}
+	
+	/**
 	 * Native method to verify RdRand status. Invokes the RdRand instruction
 	 * and propagates the numeric status returned.
 	 * @return The numeric status code returned by RdRand instruction.
