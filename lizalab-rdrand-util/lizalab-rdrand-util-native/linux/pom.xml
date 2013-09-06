@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>net.lizalab.util</groupId>
-    <artifactId>lizalab-rdrand-util</artifactId>
+    <artifactId>lizalab-rdrand-util-native</artifactId>
     <version>0.0.0.1-SNAPSHOT</version>
   </parent>
   
@@ -18,7 +18,7 @@
     <dependency>
       <groupId>net.lizalab.util</groupId>
       <artifactId>lizalab-rdrand-util-java</artifactId>
-      <version>${parent.version}</version>
+      <version>${project.parent.version}</version>
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
@@ -32,7 +32,7 @@
         <version>1.0-alpha-7</version>
         <extensions>true</extensions>
         <configuration>
-          <javahOS>linux<javahOS>
+          <javahOS>linux</javahOS>
           <compilerProvider>generic-classic</compilerProvider>
           <compilerExecutable>gcc</compilerExecutable>
           <linkerExecutable>gcc</linkerExecutable>

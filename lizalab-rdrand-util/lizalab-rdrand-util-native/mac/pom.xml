@@ -18,7 +18,7 @@
     <dependency>
       <groupId>net.lizalab.util</groupId>
       <artifactId>lizalab-rdrand-util-java</artifactId>
-      <version>${parent.version}</version>
+      <version>${project.parent.version}</version>
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
