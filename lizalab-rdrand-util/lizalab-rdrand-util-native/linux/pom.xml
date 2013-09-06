@@ -48,7 +48,7 @@
             <compilerStartOption>-g -O2 -O2 -fPIC -I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux</compilerStartOption>
           </compilerStartOptions>
           <linkerStartOptions>
-            <linkerStartOption>-shared -L${project.build.directory} -lrdrand</linkerStartOption>
+            <linkerStartOption>-shared '-L${project.build.directory}' -lrdrand</linkerStartOption>
           </linkerStartOptions>
         </configuration>
         <executions>
