@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.lizalab.util</groupId>
+    <artifactId>lizalab-rdrand-util</artifactId>
+    <version>0.0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>librdrandutil</artifactId>
+  <packaging>so</packaging>
+
+  <name>lizalab-rdrand-util-native-linux</name>
+  <description>Defines the Linux specific native compile options for the module implementing the header defined by the Java module calling RdRand</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>net.lizalab.util</groupId>
+      <artifactId>lizalab-rdrand-util-java</artifactId>
+      <version>${parent.version}</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>native-maven-plugin</artifactId>
+        <version>1.0-alpha-7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <javahOS>linux<javahOS>
+          <compilerProvider>generic-classic</compilerProvider>
+          <compilerExecutable>gcc</compilerExecutable>
+          <linkerExecutable>gcc</linkerExecutable>
+          <sources>
+            <source>
+              <directory>../src/main/native</directory>
+              <fileNames>
+                <fileName>rdrandutil.c</fileName>
+              </fileNames>
+            </source>
+          </sources>
+          <compilerStartOptions>
+            <compilerStartOption>-g -O2 -O2 -fPIC -I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux</compilerStartOption>
+          </compilerStartOptions>
+          <linkerStartOptions>
+            <linkerStartOption>-shared -L${project.build.directory} -lrdrand</linkerStartOption>
+          </linkerStartOptions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>javah</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <javahProvider>default</javahProvider>
+              <javahOutputDirectory>${project.build.directory}/custom-javah</javahOutputDirectory>
+              <workingDirectory>${basedir}</workingDirectory>
+              <javahOutputFileName>rdrandutil.h</javahOutputFileName>
+              <javahClassNames>
+                <javahClassName>net.lizalab.util.RdRandUtil</javahClassName>
+              </javahClassNames>
+            </configuration>
+            <goals>
+              <goal>javah</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <executions>
+          <execution>
+            <id>Build librdrand</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>../scripts/build-rdrand.sh</executable>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
