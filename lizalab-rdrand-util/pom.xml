@@ -22,10 +22,15 @@
   </properties>
 
   <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <name>Lizalab Nexus Releases Repository</name>
+      <url>dav:http://lizalab.com/nexus/content/repositories/releases/</url>
+    </repository>
     <snapshotRepository>
       <id>snapshots</id>
       <name>Lizalab Nexus Snapshots Repository</name>
-      <url>http://lizalab.com/nexus/content/repositories/snapshots/</url>
+      <url>dav:http://lizalab.com/nexus/content/repositories/snapshots/</url>
       <uniqueVersion>false</uniqueVersion>
       <layout>default</layout>
     </snapshotRepository>
@@ -163,8 +168,8 @@
   
   <scm>
   	<url>http://lizalab.com/svn/rdrand-util</url>
-  	<connection>scm:svn:http://lizalab.com/svn/rdrand-util</connection>
-  	<developerConnection>scm:svn:http://lizalab.com/svn/rdrand-util</developerConnection>
+  	<connection>scm:svn:http://lizalab.com/svn/rdrand-util/trunk</connection>
+  	<developerConnection>scm:svn:http://lizalab.com/svn/rdrand-util/trunk</developerConnection>
   	<tag>HEAD</tag>
   </scm>
 </project>
