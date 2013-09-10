@@ -1,4 +1,8 @@
 # Makefile for RdRand Java Utility JNI Implementation.
+# 
+# Generates the JNI header from the class with the native calls.
+# Compiles the JNI implementation linking it to rdrand and creating
+# a shared library.
 
 TARGET_DIR := ../../../target/classes
 TARGET := $(TARGET_DIR)/librdrandjutil.so
@@ -21,7 +25,9 @@ endif
 all: $(TARGET)
 
 $(TARGET): net_lizalab_util_RdRandUtil.c $(WORKING_DIR)/config.h $(WORKING_DIR)/rdrand.h $(WORKING_DIR)/net_lizalab_util_RdRandUtil.h
+	@echo "[INFO] Compiling JNI implementation and linking shared library .."
 	gcc -O2 -shared -fPIC -L$(WORKING_DIR) -lrdrand $(INCLUDES) net_lizalab_util_RdRandUtil.c -o $(TARGET)
 
 $(WORKING_DIR)/net_lizalab_util_RdRandUtil.h: $(TARGET_DIR)/net/lizalab/util/RdRandUtil.class
+	@echo "[INFO] Generating JNI header .."
 	javah -force -classpath $(JAVAH_CLASSPATH) -d $(WORKING_DIR) net.lizalab.util.RdRandUtil

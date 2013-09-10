@@ -14,7 +14,8 @@ public enum RdRandStatus {
 	NOT_READY(-1, "The rdrand call was unsuccessful, the hardware was not ready, and a random number was not returned."),
 	SUPPORTED(-2, "The rdrand instruction is supported by the host hardware."),
 	UNSUPPORTED(-3, "The rdrand instruction is unsupported by the host hardware."),
-	UNKNOWN(-4, "Whether or not the hardware supports the rdrand instruction is unknown.");
+	UNKNOWN(-4, "Whether or not the hardware supports the rdrand instruction is unknown."),
+	NOT_LOADED(-5, "The RdRand Java Utility Native Shared Library is not loaded.");
 	
 	/**
 	 * Numeric code for RdRand status. API calls return these values.

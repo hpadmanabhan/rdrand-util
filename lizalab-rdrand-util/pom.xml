@@ -68,6 +68,15 @@
         <version>2.2</version>
       </extension>
     </extensions>
+    <resources>
+      <!-- Exclude the rdrand source from generated library archive. -->
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>*.tar.gz</exclude>
+        </excludes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -92,6 +101,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <executions>
+          <!-- Build the Intel rdrand library and place artifacts where the JNI utility build requires them. -->
           <execution>
             <id>build-librdrand</id>
             <phase>process-classes</phase>
@@ -102,6 +112,7 @@
               <executable>scripts/build-rdrand.sh</executable>
             </configuration>
           </execution>
+          <!-- Build the JNI utility implementation. -->
           <execution>
             <id>build-native</id>
             <phase>process-classes</phase>
