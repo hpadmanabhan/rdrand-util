@@ -26,7 +26,8 @@ all: $(TARGET)
 
 $(TARGET): net_lizalab_util_RdRandUtil.c $(WORKING_DIR)/config.h $(WORKING_DIR)/rdrand.h $(WORKING_DIR)/net_lizalab_util_RdRandUtil.h
 	@echo "[INFO] Compiling JNI implementation and linking shared library .."
-	gcc -O2 -shared -fPIC -L$(WORKING_DIR) -lrdrand $(INCLUDES) net_lizalab_util_RdRandUtil.c -o $(TARGET)
+	gcc -fPIC -g -O2 -c net_lizalab_util_RdRandUtil.c $(INCLUDES)
+	gcc net_lizalab_util_RdRandUtil.o -shared -o $(TARGET) -L$(WORKING_DIR) -lrdrand
 
 $(WORKING_DIR)/net_lizalab_util_RdRandUtil.h: $(TARGET_DIR)/net/lizalab/util/RdRandUtil.class
 	@echo "[INFO] Generating JNI header .."

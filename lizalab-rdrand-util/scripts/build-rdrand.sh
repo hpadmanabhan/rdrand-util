@@ -22,7 +22,11 @@ echo "[INFO] Configuring RdRand build .."
 ./configure
 
 echo "[INFO] Building RdRand .."
-make
+# We run the build manually instead of using the generated Makefile
+# because we need to compile with -fPIC to generate a shared library
+# and we do not need to compile the extra test stuff.
+gcc -g -O2 -O2 -fPIC -c rdrand.c
+ar rcs librdrand.a rdrand.o
 
 echo "[INFO] Copying artifacts required by JNI native build to target/jni .."
 cp librdrand.a ../jni
