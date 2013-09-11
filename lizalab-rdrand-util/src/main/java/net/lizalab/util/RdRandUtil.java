@@ -68,7 +68,12 @@ public final class RdRandUtil {
 		}
 		// Extract the native shared library from jar to temp dir.
 		String tempFolder = new File(System.getProperty("java.io.tmpdir")).getAbsolutePath();
-		File extractedLibFile = new File(tempFolder, LIB_NAME);
+		/*
+		 *  Since this library will run in user land we will prefix the user to the
+		 *  extracted library to ensure unique instance of the shared object writable by
+		 *  the user avoiding errors trying to overwrite library written previously by a different user.
+		 */
+		File extractedLibFile = new File(tempFolder, System.getProperty("user.name") + "_" + LIB_NAME);
 		LOGGER.debug("{} Loading bundled native shared library to {}", methodName, extractedLibFile.getAbsolutePath());
 		FileOutputStream writer = null;
 		try {
