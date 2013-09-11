@@ -87,8 +87,9 @@ public final class RdRandRandom extends Random {
         int next = 0;
 
         nextBytes(b);
-        for (int i = 0; i < numBytes; i++)
-            next = (next << 8) + (b[i] & 0xFF);
+        for (int i = 0; i < numBytes; i++) {
+        	next = (next << 8) + (b[i] & 0xFF);
+        }
 
         return next >>> (numBytes*8 - bits); 
 	}
