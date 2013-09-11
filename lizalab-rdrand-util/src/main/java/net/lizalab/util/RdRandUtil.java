@@ -30,6 +30,11 @@ public final class RdRandUtil {
 	private static final boolean LOADED;
 	
 	/**
+	 * Bytes to read at a time from an input stream.
+	 */
+	private static final int READ_BYTES = 1024;
+	
+	/**
 	 * Loads the shared library implementing the native methods.
 	 */
 	static {
@@ -57,32 +62,38 @@ public final class RdRandUtil {
             return LOADED;
         }
 		// Check that the shared library is packaged.
-		if (RdRandUtil.class.getResourceAsStream(File.separator + LIB_NAME) == null) {
+		InputStream reader = RdRandUtil.class.getResourceAsStream(File.separator + LIB_NAME);
+		if (reader == null) {
 			return false;
 		}
 		// Extract the native shared library from jar to temp dir.
 		String tempFolder = new File(System.getProperty("java.io.tmpdir")).getAbsolutePath();
 		File extractedLibFile = new File(tempFolder, LIB_NAME);
 		LOGGER.debug("{} Loading bundled native shared library to {}", methodName, extractedLibFile.getAbsolutePath());
+		FileOutputStream writer = null;
 		try {
-			InputStream reader = RdRandUtil.class.getResourceAsStream(File.separator + LIB_NAME);
-			FileOutputStream writer = new FileOutputStream(extractedLibFile);
-			byte[] buffer = new byte[1024];
+			writer = new FileOutputStream(extractedLibFile);
+			byte[] buffer = new byte[READ_BYTES];
 			int bytesRead = 0;
 			while ((bytesRead = reader.read(buffer)) != -1) {
 				writer.write(buffer, 0, bytesRead);
 			}
-			writer.close();
-			reader.close();
 		} catch (IOException e) {
 			LOGGER.error("{} Failed to extract and load bundled native shared library due to {}", methodName, e);
 			return false;
+		} finally {
+			// Check and close streams.
+			if (writer != null) {
+				try { writer.close(); } catch (Exception e){}
+			}
+			try { reader.close(); } catch (Exception e){}
 		}
 		// Load the extracted library.
 		try {
 			System.load(extractedLibFile.getAbsolutePath());
 		} catch (UnsatisfiedLinkError e) {
 			LOGGER.error("{} Failed to load extracted native library due to {}", methodName, e);
+			return false;
 		}
 		LOGGER.debug("{} Native shared library loaded.", methodName);
 		return true;
