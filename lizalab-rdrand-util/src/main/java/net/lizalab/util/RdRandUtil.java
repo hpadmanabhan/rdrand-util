@@ -128,7 +128,7 @@ public final class RdRandUtil {
 	private static native int verifyNative();
 	
 	/**
-	 * Verifies the the availability and status of the RdRand instruction
+	 * Verifies the availability and status of the RdRand instruction
 	 * on the host.
 	 * @return Status of the RdRand instruction on the host.
 	 */
