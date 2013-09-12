@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2013 Hemant Padmanabhan
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+  
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -8,14 +24,30 @@
   <packaging>jar</packaging>
 
   <name>lizalab-rdrand-util</name>
-  <description>Provides java.util.Random extensions using Intel's hardware circuit based Digital Random Number Generator (DRNG) RdRand library using JNI.</description>
+  <description>Provides java.util.Random extensions using Intel's hardware circuit based Digital Random Number Generator (DRNG) RDRAND instruction library (librdrand) using JNI.</description>
 
  <organization>
-    <name>Lizalab Inc.</name>
+    <name>Lizalab</name>
     <url>www.lizlab.net</url>
   </organization>
   <inceptionYear>2013</inceptionYear>
   <url>http://www.lizalab.net</url>
+  
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+  
+  <developers>
+    <developer>
+      <id>hemant</id>
+      <name>Hemant Padmanabhan</name>
+      <email>padmanabhanhemant at gmail dot com</email>
+    </developer>
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,7 +69,7 @@
     <site>
       <id>nexus-site</id>
       <name>Lizalab Nexus Sites Repository</name>
-      <url>dav:http://minastirith/nexus/content/sites/site/${project.groupId}/${project.artifactId}/${project.version}</url>
+      <url>dav:http://lizalab.com/nexus/content/sites/site/${project.groupId}/${project.artifactId}/${project.version}</url>
     </site>
   </distributionManagement>
 
@@ -80,11 +112,12 @@
       </extension>
     </extensions>
     <resources>
-      <!-- Exclude the rdrand source from generated library archive. -->
+      <!-- Exclude the rdrand source and log4j properties from generated library archive. -->
       <resource>
         <directory>src/main/resources</directory>
         <excludes>
           <exclude>*.tar.gz</exclude>
+          <exclude>log4j.properties</exclude>
         </excludes>
       </resource>
     </resources>
