@@ -98,16 +98,9 @@ public final class RdRandRandom extends Random {
 	 */
 	@Override
 	protected int next(int bits) {
-        int numBytes = (bits+7)/8;
-        byte b[] = new byte[numBytes];
-        int next = 0;
-
-        nextBytes(b);
-        for (int i = 0; i < numBytes; i++) {
-        	next = (next << 8) + (b[i] & 0xFF);
-        }
-
-        return next >>> (numBytes*8 - bits); 
+		int numBytes = (bits+7)/8;
+		int next = RdRandUtil.next(numBytes);
+        return next >>> (numBytes*8 - bits);
 	}
 
 }

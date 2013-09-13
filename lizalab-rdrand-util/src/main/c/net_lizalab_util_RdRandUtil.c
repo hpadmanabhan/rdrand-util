@@ -44,3 +44,22 @@ JNIEXPORT jint JNICALL Java_net_lizalab_util_RdRandUtil_nextBytesNative
 	}
 	return r;
 }
+
+/*
+ * Class:     net_lizalab_util_RdRandUtil
+ * Method:    nextInt
+ * Signature: ([II)I
+ */
+JNIEXPORT jint JNICALL Java_net_lizalab_util_RdRandUtil_nextInt
+  (JNIEnv *env, jclass cls, jintArray num, jint bits) {
+	union {
+		unsigned char buffer[bits];
+		int i;
+	} number;
+	int r = rdrand_get_bytes(bits, number.buffer);
+	if ( r == RDRAND_SUCCESS ) {
+		int numArr[1] = {number.i};
+		(*env)->SetIntArrayRegion(env, num, 0, 1, (jint*) numArr);
+	}
+	return r;
+}

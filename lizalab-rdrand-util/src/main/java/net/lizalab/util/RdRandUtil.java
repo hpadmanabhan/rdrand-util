@@ -166,4 +166,31 @@ public final class RdRandUtil {
 			throw new RdRandException(status);
 		}
 	}
+	
+	/**
+	 * Native method fetching an int from RdRand containing the specified
+	 * specified number of pseudo-random bits.
+	 * @param num The int array to fill with the generated int.
+	 * @param bits bits number of pseudo-random bits to be generated.
+	 * @return Numeric status code returned by RdRand for the fetch operation.
+	 */
+	private static native int nextInt(int[] num, int bits);
+	
+	/**
+	 * Generates an integer containing the user-specified number of
+     * pseudo-random bits.
+	 * @param bits number of pseudo-random bits to be generated, where
+     * 0 <= <code>bits</code> <= 32.
+	 * @return an <code>int</code> containing the user-specified number
+     * of pseudo-random bits.
+	 */
+	public static int next(int bits) {
+		int[] nextInt = new int[1];
+		int result = nextInt(nextInt, bits);
+		RdRandStatus status = RdRandStatus.getStatusByCode(result);
+		if (status != RdRandStatus.SUCCESS) {
+			throw new RdRandException(status);
+		}
+		return nextInt[0];
+	}
 }
