@@ -23,7 +23,7 @@
   <version>0.0.0.12-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>lizalab-rdrand-util</name>
+  <name>RdRand Java Utility</name>
   <description>Provides java.util.Random extension wrapping Intel's Digital Random Number Generator (DRNG) known as Intel Secure Key, a name for its RDRAND instruction via its free library librdrand using JNI.</description>
 
  <organization>
