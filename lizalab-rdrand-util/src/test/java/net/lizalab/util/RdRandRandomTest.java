@@ -41,7 +41,7 @@ public class RdRandRandomTest {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(RdRandRandomTest.class);
 	
-	private int[] ndigits = new int[10];
+	private int[] ndigits;
 	
 	private int values = 10000000;
 	
@@ -88,8 +88,14 @@ public class RdRandRandomTest {
 	private void meanTest(Random random, boolean doAssert) {
 		final String methodName = "meanTest : ";
 		
+		ndigits = new int[10];
+		// Initialize the array
+		for (int i = 0; i < 10; i++) {
+			ndigits[i] = 0;
+		}
 		double x;
 		int n;
+		
 		SummaryStatistics stats = new SummaryStatistics();
 	
 		long start = System.currentTimeMillis();
@@ -132,13 +138,13 @@ public class RdRandRandomTest {
 		}
 		else {
 			if (!varResult) {
-				LOGGER.error("{} {}", methodName, varMsg);
+				LOGGER.warn("{} {}", methodName, varMsg);
 			}
 			if (!ci99Result) {
-				LOGGER.error("{} {}", methodName, ci99Msg);
+				LOGGER.warn("{} {}", methodName, ci99Msg);
 			}
 			if (!ci95Result) {
-				LOGGER.error("{} {}", methodName, ci95Msg);
+				LOGGER.warn("{} {}", methodName, ci95Msg);
 			}
 		}
 	}
@@ -155,11 +161,12 @@ public class RdRandRandomTest {
 		
 		SummaryStatistics stats = new SummaryStatistics();
 		// Initialize the array
+		ndigits = new int[10];
 		for (int i = 0; i < 10; i++) {
 			ndigits[i] = 0;
 			stats.addValue(i);
 		}
-		
+				
 		// Calculate the confidence intervals to assert.
 		mean = stats.getMean();
 		stdDev = stats.getStandardDeviation();
@@ -259,7 +266,7 @@ public class RdRandRandomTest {
 		}
 		else {
 			if (!result) {
-				LOGGER.error("{} {}", methodName, msg);
+				LOGGER.warn("{} {}", methodName, msg);
 			}
 		}
 	}
