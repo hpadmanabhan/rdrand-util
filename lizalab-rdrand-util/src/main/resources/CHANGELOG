@@ -1,0 +1,6 @@
+Version History
+---------------
+
+1.1 - Added Uncommons Maths SeedGenerator implementation to enable using RDRAND as seed source with UnCommons Maths RNGs.
+1.0.1 - Fixed bug in mean test implementation in RdRandRandomTest where distributions array was not being reset between runs for different RNGs.
+1.0 - Initial release of the utility providing an implementation of java.util.Random using RDRAND via JNI.

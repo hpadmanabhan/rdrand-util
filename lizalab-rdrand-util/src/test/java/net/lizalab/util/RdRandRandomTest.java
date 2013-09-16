@@ -21,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
@@ -29,6 +30,8 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.uncommons.maths.random.AESCounterRNG;
+import org.uncommons.maths.random.SeedException;
 
 /**
  * A Randomness test for RdRandRandom that also verifies
@@ -154,9 +157,11 @@ public class RdRandRandomTest {
 	 * over 100 million values. Also runs the test for Random and SecureRandom for
 	 * reference.
 	 * Based on Mean Test outlined in <i>Beautiful Testing</i> published by O'Reilly.
+	 * @throws GeneralSecurityException 
+	 * @throws SeedException 
 	 */
 	@Test
-	public final void testRdRandRandomMean() {
+	public final void testRdRandRandomMean() throws GeneralSecurityException, SeedException {
 		final String methodName = "testRdRandRandom : ";
 		
 		SummaryStatistics stats = new SummaryStatistics();
@@ -200,6 +205,10 @@ public class RdRandRandomTest {
 		
 		LOGGER.info("{} Running for SecureRandom..", methodName);
 		random = new SecureRandom();
+		meanTest(random, false);
+		
+		LOGGER.info("{} Running Uncommons Maths AESCounterRNG using RdRandSeedGenerator..", methodName);
+		random = new AESCounterRNG(new RdRandSeedGenerator());
 		meanTest(random, false);
 	}
 	
@@ -274,9 +283,11 @@ public class RdRandRandomTest {
 	/**
 	 * Tests RdRandRandom using the Monte Carlo Pi approximation test.
 	 * Also runs the test for Random and SecureRandom for reference.
+	 * @throws GeneralSecurityException 
+	 * @throws SeedException 
 	 */
 	@Test
-	public final void testRdRandRandomMonteCarloPi() {
+	public final void testRdRandRandomMonteCarloPi() throws SeedException, GeneralSecurityException {
 		final String methodName = "testRdRandRandomMonteCarloPiTest : ";
 		
 		precision = expectedPrecision(numPoints);
@@ -295,6 +306,10 @@ public class RdRandRandomTest {
 		
 		LOGGER.info("{} Running for SecureRandom..", methodName);
 		random = new SecureRandom();
+		monteCarloPiTest(random, false);
+		
+		LOGGER.info("{} Running Uncommons Maths AESCounterRNG using RdRandSeedGenerator..", methodName);
+		random = new AESCounterRNG(new RdRandSeedGenerator());
 		monteCarloPiTest(random, false);
 	}
 }
