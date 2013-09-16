@@ -20,7 +20,7 @@
 
   <groupId>net.lizalab.util</groupId>
   <artifactId>lizalab-rdrand-util</artifactId>
-  <version>1.0.1.1</version>
+  <version>1.0.1.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>RdRand Java Utility</name>
@@ -230,8 +230,8 @@
   </ciManagement>
   
   <scm>
-  	<url>http://lizalab.com/svn/rdrand-util/tags/lizalab-rdrand-util-BUILD-1.0.1.1</url>
-  	<connection>scm:svn:http://lizalab.com/svn/rdrand-util/tags/lizalab-rdrand-util-BUILD-1.0.1.1</connection>
-  	<developerConnection>scm:svn:http://lizalab.com/svn/rdrand-util/tags/lizalab-rdrand-util-BUILD-1.0.1.1</developerConnection>
+  	<url>http://lizalab.com/svn/rdrand-util</url>
+  	<connection>scm:svn:http://lizalab.com/svn/rdrand-util/trunk</connection>
+  	<developerConnection>scm:svn:http://lizalab.com/svn/rdrand-util/trunk</developerConnection>
   </scm>
 </project>
