@@ -57,19 +57,19 @@
     <repository>
       <id>releases</id>
       <name>Lizalab Nexus Releases Repository</name>
-      <url>dav:http://lizalab.com/nexus/content/repositories/releases/</url>
+      <url>dav:https://lizalab.com/nexus/content/repositories/releases/</url>
     </repository>
     <snapshotRepository>
       <id>snapshots</id>
       <name>Lizalab Nexus Snapshots Repository</name>
-      <url>dav:http://lizalab.com/nexus/content/repositories/snapshots/</url>
+      <url>dav:https://lizalab.com/nexus/content/repositories/snapshots/</url>
       <uniqueVersion>false</uniqueVersion>
       <layout>default</layout>
     </snapshotRepository>
     <site>
       <id>nexus-site</id>
       <name>Lizalab Nexus Sites Repository</name>
-      <url>dav:http://lizalab.com/nexus/content/sites/site/${project.groupId}/${project.artifactId}/${project.version}</url>
+      <url>dav:https://lizalab.com/nexus/content/sites/site/${project.groupId}/${project.artifactId}/${project.version}</url>
     </site>
   </distributionManagement>
 
@@ -231,7 +231,7 @@
   
   <scm>
   	<url>http://lizalab.com/svn/rdrand-util</url>
-  	<connection>scm:svn:http://lizalab.com/svn/rdrand-util/trunk</connection>
-  	<developerConnection>scm:svn:http://lizalab.com/svn/rdrand-util/trunk</developerConnection>
+  	<connection>scm:svn:https://lizalab.com/svn/rdrand-util/trunk</connection>
+  	<developerConnection>scm:svn:https://lizalab.com/svn/rdrand-util/trunk</developerConnection>
   </scm>
 </project>
