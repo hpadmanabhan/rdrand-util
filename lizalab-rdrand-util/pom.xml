@@ -20,7 +20,7 @@
 
   <groupId>net.lizalab.util</groupId>
   <artifactId>lizalab-rdrand-util</artifactId>
-  <version>1.1.0.2-SNAPSHOT</version>
+  <version>1.1.0.3-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>RdRand Java Utility</name>
@@ -195,7 +195,7 @@
       			<featureBranchPrefix>feature-</featureBranchPrefix>
       			<releaseBranchPrefix>release-</releaseBranchPrefix>
       			<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
-      			<versionTagPrefix></versionTagPrefix>
+      			<versionTagPrefix />
       		</flowInitContext>
       		<enableSshAgent>true</enableSshAgent>
       		<!-- Default to pushing features for remote backups. -->
