@@ -242,6 +242,6 @@
   <scm>
   	<url>https://github.com/hpadmanabhan/rdrand-util</url>
   	<connection>scm:git:https://github.com/hpadmanabhan/rdrand-util.git</connection>
-  	<developerConnection>scm:git:ssh://git@github.com:hpadmanabhan/rdrand-util.git</developerConnection>
+  	<developerConnection>scm:git:git@github.com:hpadmanabhan/rdrand-util.git</developerConnection>
   </scm>
 </project>
