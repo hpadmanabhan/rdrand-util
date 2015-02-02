@@ -203,6 +203,21 @@
       		<noDeploy>false</noDeploy>
       	</configuration>
       </plugin>
+      <!-- Strictly for dev releases to update snapshot versions, actual releases handled by jgitflow. -->
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-release-plugin</artifactId>
+      	<version>2.5.1</version>
+      </plugin>
+      <!-- Used in tagging dev releases and incrementing dev snapshot versions. -->
+      <plugin>
+      	<artifactId>maven-scm-plugin</artifactId>
+      	<version>1.9.2</version>
+      	<configuration>
+      		<basedir>${project.basedir}</basedir>
+      		<tag>${project.version}</tag>
+      	</configuration>
+      </plugin>
     </plugins>
   </build>
   
